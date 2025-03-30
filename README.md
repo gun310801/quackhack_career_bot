@@ -61,9 +61,8 @@ Delivers:
 
 ### 🔹 3️⃣ Upskilling Recommendation Agent  
 Bridges skill gaps by:  
-- Scraping job postings to identify in-demand skills  
 - Recommending courses and certifications  
-- Analyzing resumes to detect improvement areas  
+- Recommending skills to achieve the goal
 
 ---
 
