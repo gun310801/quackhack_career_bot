@@ -181,3 +181,58 @@
     }
   }
   
+  .loading-indicator {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .loading-indicator .dot {
+    width: 8px;
+    height: 8px;
+    margin: 0 3px;
+    background-color: #007bff;
+    border-radius: 50%;
+    animation: bounce 1.5s infinite ease-in-out;
+  }
+  
+  .loading-indicator .dot:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .loading-indicator .dot:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  .loading-indicator .dot:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  .loading-duck {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    margin-top: 10px;
+  }
+  
+  .loading-duck img {
+    width: 150px; 
+    height: auto;
+    animation: walk 1s linear infinite; 
+  }
+  
+  @keyframes walk {
+    0% { transform: translateX(-20px); }
+    50% { transform: translateX(20px); }
+    100% { transform: translateX(-20px); }
+  }
+
+  @keyframes bounce {
+    0%, 80%, 100% {
+      transform: scale(0);
+    }
+    40% {
+      transform: scale(1);
+    }
+  }
+  

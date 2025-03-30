@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
 import { sendCareerQuery } from '../services/api';
 
-const ChatInput = ({ setMessages }) => {
+const ChatInput = ({ setMessages, setLoading }) => {
   const [input, setInput] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!input.trim()) return;
 
-    // Add the user message to the chat
     const userMessage = { sender: 'user', text: input };
     setMessages((prevMessages) => [...prevMessages, userMessage]);
-
-    // Send the query to the backend and get the AI response
-    const aiResponse = await sendCareerQuery(input);
-    const aiMessage = { sender: 'ai', text: aiResponse };
-
-    // Add the AI message to the chat after the user input
-    setMessages((prevMessages) => [...prevMessages, aiMessage]);
-
-    // Clear input after sending
     setInput('');
+    
+    setLoading(true);
+
+    try {
+      const aiResponse = await sendCareerQuery(input);
+      const aiMessage = { sender: 'ai', text: aiResponse };
+
+      setMessages((prevMessages) => [...prevMessages, aiMessage]);
+    } catch (error) {
+      console.error("Error fetching AI response:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

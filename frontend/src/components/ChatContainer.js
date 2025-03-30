@@ -1,23 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ChatInput from './ChatInput';
-import "../styles/chatStyling.css"
+import ChatOutput from './ChatOutput';
+import "../styles/chatStyling.css";
 
-const ChatContainer = ({ messages, setMessages }) => {
+const ChatContainer = () => {
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false); 
+
   return (
     <div className="chat-container">
       <div className="chat-box">
-        <div className="message-list">
-          {messages.map((msg, index) => (
-            <div 
-              key={index} 
-              className={`message ${msg.sender === 'user' ? 'user-message' : 'ai-message'}`}
-            >
-              <p>{msg.text}</p>
-            </div>
-          ))}
-        </div>
+        <ChatOutput messages={messages} loading={loading} />
       </div>
-      <ChatInput setMessages={setMessages} />
+      <ChatInput setMessages={setMessages} setLoading={setLoading} />
     </div>
   );
 };
