@@ -1,5 +1,16 @@
 # state.py
-from typing import TypedDict, List, Optional, Dict, Any
+from typing import TypedDict, List,Literal, Optional, Dict, Any
+
+class UserData(TypedDict, total=False):
+    current_role: str
+    location: str
+    current_salary: int
+    years_experience: int
+
+
+class ChatTurn(TypedDict):
+    role: Literal["user", "assistant"]
+    content: str
 
 class CareerBotState(TypedDict):
     query: str
