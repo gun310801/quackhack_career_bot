@@ -1,9 +1,10 @@
-from langchain.tools import tool
+from langchain_core.tools import tool
 import pandas as pd
 
 # Load benchmark dataset
 BUCKET_DATA = pd.read_csv("bls/Level_compensation_by_bucket.csv")
 
+# @tool(name="get_salary_summary")
 @tool
 def get_salary_summary(level_bucket: str = None) -> dict:
     """

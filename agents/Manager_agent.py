@@ -274,7 +274,7 @@ Your reply must ALWAYS be in valid JSON format like this:
             return state
 
         # All good — route to agent
-        state["next"] = agent_queue.pop(0)
+        state["next"] = state["agent_queue"][0]
         return state
 
     # No routing yet — stay in convo

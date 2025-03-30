@@ -14,6 +14,7 @@ llm = ChatOpenAI(model="gpt-4", temperature=0.3, api_key=OPENAI_API_KEY)
 
 # 📦 LangGraph-compatible ToolNode (no initialize_agent anymore!)
 salary_node = ToolNode(
+    name="salary_agent",
     tools=[
         compare_to_market,
         get_salary_summary,

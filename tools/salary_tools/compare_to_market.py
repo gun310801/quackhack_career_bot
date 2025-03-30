@@ -1,9 +1,10 @@
-from langchain.tools import tool
+from langchain_core.tools import tool
 import pandas as pd
 
 # Load benchmark dataset once (you can optimize to cache/load externally)
 BUCKET_DATA = pd.read_csv("bls/Level_compensation_by_bucket.csv")
 
+# @tool(name="compare_to_market")
 @tool
 def compare_to_market(current_role: str = None, level_bucket: str = None, current_salary: int = None) -> dict:
     """

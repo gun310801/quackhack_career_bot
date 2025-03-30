@@ -1,10 +1,11 @@
-from langchain.tools import tool
+from langchain_core.tools import tool
 import pandas as pd
 
 # Load state salary data
 INFO_DATA = pd.read_csv("bls/information_state_quarterwise_salary.csv")
 PROF_DATA = pd.read_csv("bls/professional_state_quarterwise_salary.csv")
 
+# @tool(name="get_state_salary")
 @tool
 def get_state_salary(state: str = None, industry: str = None) -> dict:
     """

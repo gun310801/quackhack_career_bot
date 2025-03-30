@@ -1,9 +1,10 @@
-from langchain.tools import tool
+from langchain_core.tools import tool
 import pandas as pd
 
 # Load company-level salary data
 COMPANY_DATA = pd.read_csv("bls/Level_compensation_by_company.csv")
 
+# @tool(name="get_company_salary_data")
 @tool
 def get_company_salary_data(company: str, level_bucket: str) -> str:
     """

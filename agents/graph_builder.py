@@ -1,24 +1,33 @@
 from langgraph.graph import StateGraph, END
-from langgraph.prebuilt import ToolNode
-from agents.manager_agent import interface  # 🧠 Your interface agent
-from agents.salary_agent import salary_node  # 🛠 Salary ToolNode
-from state import CareerBotState  # 🗂️ Shared state object
+from langgraph.prebuilt import ToolNode, tools_condition
+from agents.manager_agent import interface  # 🧠 Interface agent function
+from agents.salary_agent import salary_node  # 🛠 ToolNode for salary
+from state import CareerBotState  # 🗂️ Shared state definition
 
-# Create the LangGraph
+# 🔧 Build the LangGraph
 graph = StateGraph(CareerBotState)
 
-# Add nodes
-graph.add_node("interface", interface)           # interface = normal def function
-graph.add_node("salary_agent", salary_node)      # salary_agent = ToolNode
+# 🧩 Add nodes
+graph.add_node("interface", interface)
+graph.add_node("salary_agent", salary_node)
 
-# Define edges
+# 🚪 Set entry point
 graph.set_entry_point("interface")
-graph.add_edge("interface", "interface")   
-graph.add_edge("interface", END)          
-graph.add_edge("interface", "salary_agent")
-graph.add_edge("salary_agent", "interface")  # Return if missing_fields present
+graph.add_edge("interface", END)
+# 🔀 Smart conditional routing from interface to agent
+graph.add_conditional_edges(
+    "interface",
+    tools_condition,
+    {
+        "salary": "salary_agent"
+    }
+)
 
-  # If next = done
+# 🔁 Go back to interface if salary agent needs more input
+graph.add_edge("salary_agent", "interface")
 
-# Compile the graph
+# ✅ End condition
+graph.add_edge("interface", END)
+
+# 🧠 Compile the graph
 career_bot = graph.compile()
