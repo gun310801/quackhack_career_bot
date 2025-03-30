@@ -1,6 +1,6 @@
 # test_interface_llm.py
 
-from agents.Manager_agent import interface
+from agents.manager_agent import interface
 from state import CareerBotState
 
 # Initial empty state

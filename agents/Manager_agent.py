@@ -149,7 +149,8 @@ You are the main assistant for a career advice chatbot. Your job is to:
    - upskill_agent
    - simulator_agent
 
-You must respond in valid JSON ONLY like this:
+
+Your reply must ALWAYS be in valid JSON format like this:
 ```json
 {
   "assistant_message": "Your friendly reply to the user",
@@ -167,6 +168,63 @@ You must respond in valid JSON ONLY like this:
         messages.append({"role": turn["role"], "content": turn["content"]})
 
     # Send to LLM
+    # response = llm.chat.completions.create(
+    #     model="gpt-4",
+    #     temperature=0.3,
+    #     messages=messages
+    # )
+
+    # Parse response
+    # raw_output = response.choices[0].message.content.strip()
+    # print('raw op', raw_output, type(raw_output))
+    # if 'json' in raw_output:
+    #     json_str = raw_output.strip("```json")["assistant_message"]
+    # elif isinstance(raw_output, str):
+    #     json_str = raw_output
+    # else:
+    #     json_str = raw_output["assistant_message"]
+    # print(json_str) 
+
+    # try:
+    #     parsed = json.loads(json_str)
+    # except Exception as e:
+    #     print("❌ Failed to parse JSON:", e)
+    #     print("Raw LLM output:", raw_output)
+    #     state["result"] = {"error": "LLM output not parseable"}
+    #     state["next"] = "done"
+    #     return state
+
+    # # Update state with parsed data
+    # reply = parsed.get("assistant_message", "Okay.")
+    # updated_data = parsed.get("updated_user_data", {})
+    # agent_queue = parsed.get("agent_queue", [])
+
+    # state["user_data"].update(updated_data)
+    # state["chat_history"].append({"role": "assistant", "content": reply})
+    # state["agent_queue"] = agent_queue
+
+    # # Check if we need more info for next agent
+    # if agent_queue:
+    #     next_agent = agent_queue[0]
+    #     required_fields = AGENT_REQUIRED_FIELDS.get(next_agent, [])
+    #     missing = [f for f in required_fields if f not in state["user_data"]]
+
+    #     if missing:
+    #         # Ask for missing info
+    #         state["missing_fields"] = missing
+    #         prompt = f"To help with {next_agent}, could you tell me your {missing[0]}?"
+    #         state["chat_history"].append({"role": "assistant", "content": prompt})
+    #         state["next"] = "interface"
+    #         return state
+
+    #     # All good — route to agent
+    #     state["next"] = agent_queue.pop(0)
+    #     return state
+
+    # # No routing yet — stay in convo
+    # state["next"] = "interface"
+    # return state
+    # Send to LLM
     response = llm.chat.completions.create(
         model="gpt-4",
         temperature=0.3,
@@ -175,10 +233,15 @@ You must respond in valid JSON ONLY like this:
 
     # Parse response
     raw_output = response.choices[0].message.content.strip()
-    json_str = re.sub(r"```json|```", "", raw_output).strip()
 
+    # Just print the output for debugging (you can remove this after the issue is resolved)
+    print('raw op', raw_output, type(raw_output))
+
+    # Parse the raw_output as a JSON string
     try:
-        parsed = json.loads(json_str)
+        print('trying json loads')
+        parsed = json.loads(raw_output)
+        print(parsed["assistant_message"])
     except Exception as e:
         print("❌ Failed to parse JSON:", e)
         print("Raw LLM output:", raw_output)
@@ -194,6 +257,7 @@ You must respond in valid JSON ONLY like this:
     state["user_data"].update(updated_data)
     state["chat_history"].append({"role": "assistant", "content": reply})
     state["agent_queue"] = agent_queue
+    print('built state sucessfully', state)
 
     # Check if we need more info for next agent
     if agent_queue:

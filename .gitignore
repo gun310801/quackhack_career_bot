@@ -7,3 +7,4 @@ venv/
 check.ipynb
 *.ipynb
 /.venv
+key.env
