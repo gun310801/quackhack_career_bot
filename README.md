@@ -1,121 +1,99 @@
-🧠 AI Career Advisor - Multi-Agent Chatbot
-Team YOGS
-Team Members:
+# 🧠 AI Career Advisor - DuckRouter  
+**Team YOGS**
 
-Sneha Dharne – sdharne@stevens.edu
+## 👥 Team Members
+- Sneha Dharne – [sdharne@stevens.edu](mailto:sdharne@stevens.edu)  
+- Gunik Luthra – [gluthra@stevens.edu](mailto:gluthra@stevens.edu)  
+- Yash Gandhi – [ygandhi3@stevens.edu](mailto:ygandhi3@stevens.edu)  
+- Om Gandhi – [ogandhi@stevens.edu](mailto:ogandhi@stevens.edu)  
 
-Gunik Luthra – gluthra@stevens.edu
+---
 
-Yash Gandhi – ygandhi3@stevens.edu
+## 📌 Problem Statement  
+Navigating careers is tough. Our goal is to build an AI-powered system that can answer complex career questions, assess earning potential, and visualize growth trajectories—all through natural, conversational interactions.
 
-Om Gandhi – ogandhi@stevens.edu
+---
 
-📌 Problem Statement
-Your task is to build an AI-powered system that answers tough career questions, identifies earning potential, and visualizes future growth—all through natural conversations.
+## 💡 Project Description  
+We’ve developed **DuckRouter**, a multi-agent AI chatbot designed to give personalized career advice. It uses ChatGPT-based agents enhanced with real-world data from **BLS**, **Levels.fyi**, and **LinkedIn** to generate meaningful insights.
 
-💡 Project Description
-We have developed a Multi-Agent AI Chatbot that responds to career-related questions in a conversational manner. The system is powered by intelligent agents trained on ChatGPT and enriched with datasets collected from online sources such as BLS, Levels.fyi, and LinkedIn.
+### ✅ The chatbot accepts inputs like:
+- Profession  
+- Years of Experience  
+- Current Salary  
+- Location  
 
-The chatbot takes in user inputs such as:
+Based on this, users can ask:
+- “Should I switch careers?”  
+- “Where will I be paid more based on location?”  
+- “What’s my optimal path to earning more?”  
+...and much more.
 
-Profession
+---
 
-Years of experience
+## 🛠️ Technologies Used  
+- **AI Agents (LangGraph + ChatGPT)**  
+- **Python**  
+- **Markov Decision Models**  
+- **FastAPI**  
+- **React.js**
 
-Current salary
+---
 
-Location
+## 🧩 Architecture Overview  
+DuckRouter is modular by design, featuring a multi-agent architecture to ensure scalability and intelligent decision-making.
 
-Based on this information, it delivers insightful career advice. For example, it can answer questions like:
+### 🔹 1️⃣ UI Interface Agent  
+Acts as the **central coordinator** that:  
+- Interprets user intent  
+- Gathers missing inputs via follow-ups  
+- Routes queries to appropriate backend agents  
+- Returns final insights in a clean, actionable format  
 
-“Should I switch my career?”
+---
 
-“Where will I be paid more based on location?”
+### 🔹 2️⃣ Career Planning Agent  
+Delivers:
+- Personalized short-term and long-term career plans  
+- Visual pitch decks outlining career progression  
 
-“What is my career path to earn more?”
+---
 
-And many more...
+### 🔹 3️⃣ Upskilling Recommendation Agent  
+Bridges skill gaps by:  
+- Scraping job postings to identify in-demand skills  
+- Recommending courses and certifications  
+- Analyzing resumes to detect improvement areas  
 
-🛠️ Technologies Used
-AI Agents
+---
 
-LangGraph
-
-Python
-
-Markov Decision Models
-
-React.js
-
-FastAPI
-
-🧩 Project Architecture Overview
-This project is designed as an AI-powered career advisory system that helps users make informed career decisions using real-time data and intelligent agents.
-
-The architecture consists of multiple interconnected components, each serving a specific role in delivering insights, recommendations, and simulations. The UI Interface Agent is the central component that coordinates all activities between the user and backend agents.
-
-1️⃣ UI Interface Agent
-Acts as the main orchestrator that:
-
-Understands user queries and intent.
-
-Asks relevant follow-up questions to gather missing data.
-
-Routes queries to the appropriate backend agents.
-
-This modular design keeps the interface lightweight and scalable.
-
-2️⃣ Career Planning Agent (AI Agent)
-Provides:
-
-Structured short-term and long-term career plans based on the user's current role and aspirations.
-
-Fast pitch decks and visual representations of career progression.
-
-3️⃣ Upskilling Recommendation Agent
-Helps bridge skill gaps by:
-
-Scraping job postings to understand market demands.
-
-Recommending relevant skills, certifications, and courses.
-
-Allowing resume upload to identify gaps.
-
-4️⃣ Comparative Salary Agent
-Provides salary benchmarking using:
-
-BLS data
-
-Levels.fyi compensation insights
-
-LinkedIn job postings
+### 🔹 4️⃣ Comparative Salary Agent  
+Provides accurate benchmarking using:  
+- **BLS statistics**  
+- **Levels.fyi compensation data**  
+- **LinkedIn job insights**  
 
 Factors considered:
+- Role seniority  
+- Geographic location  
+- Job complexity  
 
-Seniority
+---
 
-Role complexity
+### 🔹 5️⃣ Career Switch Simulator Agent  
+Predicts career transitions using a **Markov Model**, including:  
+- Transition probabilities across roles/industries  
+- Real-world career switching trends  
+- Simulated outcomes for informed decision-making  
 
-Location
+---
 
-This ensures users receive accurate and industry-aligned salary estimates.
+## 🔁 Flow Summary  
+1. **User initiates** a conversation via the UI Agent  
+2. **UI Agent interprets** and collects missing inputs  
+3. **Query is routed** to the relevant backend agent  
+4. **Backend agent processes** the request and pulls data  
+5. **UI Agent returns** results in an intuitive format  
 
-5️⃣ Simulator Agent
-Uses a Markov model to simulate career switching. It includes:
+---
 
-Transition probabilities between roles and industries.
-
-Data from Levels.fyi to support realistic simulations.
-
-Career paths based on common job-switching patterns.
-
-This enables users to predict possible outcomes before making a transition.
-
-🔁 Flow Summary
-User interacts with the UI Interface Agent via natural language.
-
-The UI Agent routes the query to the most relevant AI agent.
-
-The selected agent processes the request and fetches required data.
-
-The UI Interface Agent compiles and returns the result in an intuitive, actionable format.
